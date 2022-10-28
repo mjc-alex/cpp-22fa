@@ -20,12 +20,12 @@ private:
         *x = 100;
     }
 };
-
+class B { };
 int main(){
     A mya;
     int t = 0;
     mya.u = 1;
     mya.fix1(&mya.u);
-    cout<<mya.u<<endl;
+    cout<<mya.u<<endl<<sizeof(B)<<endl;
     return 0;
 }
