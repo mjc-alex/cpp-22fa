@@ -12,6 +12,9 @@ public:
     CArray():num(0),cap(0),buff(NULL){ }
     ~CArray(){
         delete []buff;
+        buff = NULL;
+        num = 0;
+        cap = 0;
     }
 
     int capacity() const{
@@ -36,20 +39,22 @@ public:
     Element &at(int index){
         return buff[index];
     }
-    //Element at(int index) const;
+    Element at(int index) const{
+        return buff[index];
+    }
 
     void append(Element element){
-        if (num >= cap){
-            int capacity = (int)cap * 2;
-            recap(capacity < num ? num : capacity);
+        if (num + 1> cap){
+            int capacity = cap * 2;
+            recap(capacity < num + 1? num + 1: capacity);
         }
         buff[num] = element;
         ++num;
     }
     void insert(int index, Element element){
-        if (num >= cap){
-            int capacity = (int)cap * 2;
-            recap(capacity < num ? num : capacity);
+        if (num + 1> cap){
+            int capacity = cap * 2;
+            recap(capacity < num + 1? num + 1: capacity);
         }
         for(int i = num; i > index; --i){
             buff[i] = buff[i-1];
@@ -60,9 +65,9 @@ public:
 
     void copy(const CArray &rhs){
         if(rhs.cap > cap)
-        recap(rhs.cap);
+            recap(rhs.cap);
         for(int i=0; i< rhs.num; ++i){
-        buff[i] = rhs.buff[i];
+            buff[i] = rhs.buff[i];
         }
         num = rhs.num;
     }
@@ -80,7 +85,7 @@ private:
     /*data*/
     int cap = 0;
     int num = 0;
-    int *buff = NULL;
+    Element *buff = NULL;
 };
 
 
@@ -121,7 +126,7 @@ int main(int argc, char *argv[])
     // array_destroy(array);
     // array_destroy(array2);
     // array_destroy(array3);
-    std::cout<<"YES"<<std::endl;
+    std::cout<<sizeof(array2)<<std::endl;
 	return 0;
 }
 
